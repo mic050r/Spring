@@ -3,11 +3,13 @@ package com.example.firstproject.controller;
 import com.example.firstproject.dto.MemberForm;
 import com.example.firstproject.entity.Member;
 import com.example.firstproject.repository.MemberRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@Slf4j
 @Controller
 public class MemberController {
     @Autowired
@@ -20,10 +22,10 @@ public class MemberController {
     @PostMapping("/join")
     public String Join(MemberForm form){
         Member member = form.toEntity();
-        System.out.println(member.toString());
+        log.info(form.toString());
         // 2. 리파지터리로 엔티티를 DB에 저장
         Member saved = memberRepository.save(member); // article 엔티티를 저장해 saved 객체에 반환
-        System.out.println(saved.toString());
+        log.info(saved.toString());
 
         return "";
     }
